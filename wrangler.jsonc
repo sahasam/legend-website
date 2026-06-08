@@ -1,0 +1,12 @@
+{
+  // Cloudflare Workers static-assets config. No Worker script is needed for a
+  // pure static site — pointing at the built assets directory is the entry point.
+  "name": "legend-website",
+  "compatibility_date": "2026-06-08",
+  "assets": {
+    "directory": "./dist",
+    // Serve index.html for unknown paths so client-side routes
+    // (e.g. /writing/:slug) resolve on direct visits and hard refreshes.
+    "not_found_handling": "single-page-application"
+  }
+}
