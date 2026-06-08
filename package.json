@@ -14,11 +14,10 @@
     "@react-three/fiber": "^8.17.10",
     "@react-three/postprocessing": "^2.16.5",
     "@types/hast": "^3.0.4",
-    "buffer": "^6.0.3",
     "framer-motion": "^11.11.17",
-    "gray-matter": "^4.0.3",
     "hast-util-to-text": "^4.0.2",
     "highlight.js": "^11.11.1",
+    "js-yaml": "^4.2.0",
     "lowlight": "^3.3.0",
     "postprocessing": "^6.36.4",
     "react": "^18.3.1",
@@ -31,14 +30,15 @@
     "zustand": "^5.0.1"
   },
   "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/three": "^0.169.0",
-    "@vitejs/plugin-react": "^4.3.3",
+    "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.6.3",
-    "vite": "^5.4.11"
+    "vite": "^6.4.3"
   }
 }

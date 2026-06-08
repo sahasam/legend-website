@@ -1,9 +1,4 @@
-import matter from 'gray-matter';
-import { Buffer } from 'buffer';
-
-if (typeof window !== 'undefined' && !(window as unknown as { Buffer?: unknown }).Buffer) {
-  (window as unknown as { Buffer: typeof Buffer }).Buffer = Buffer;
-}
+import { parseFrontmatter } from './parseFrontmatter';
 
 export type ProjectFrontmatter = {
   title: string;
@@ -32,14 +27,14 @@ function normalizeYear(value: unknown): string {
 }
 
 function parse(raw: string, fallbackSlug: string): Project {
-  const { data, content } = matter(raw);
+  const { data, content } = parseFrontmatter(raw);
   return {
     frontmatter: {
-      title: data.title ?? fallbackSlug,
+      title: (data.title as string) ?? fallbackSlug,
       year: normalizeYear(data.year),
-      slug: data.slug ?? fallbackSlug,
-      summary: data.summary ?? '',
-      href: data.href,
+      slug: (data.slug as string) ?? fallbackSlug,
+      summary: (data.summary as string) ?? '',
+      href: data.href as string | undefined,
       tags: Array.isArray(data.tags) ? data.tags.map(String) : undefined,
     },
     body: content.trim(),

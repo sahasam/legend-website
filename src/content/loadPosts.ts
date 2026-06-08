@@ -1,10 +1,4 @@
-import matter from 'gray-matter';
-import { Buffer } from 'buffer';
-
-// Make gray-matter (which depends on Buffer) work in the browser bundle.
-if (typeof window !== 'undefined' && !(window as unknown as { Buffer?: unknown }).Buffer) {
-  (window as unknown as { Buffer: typeof Buffer }).Buffer = Buffer;
-}
+import { parseFrontmatter } from './parseFrontmatter';
 
 export type PostFrontmatter = {
   title: string;
@@ -32,14 +26,14 @@ function normalizeDate(value: unknown): string {
 }
 
 function parse(raw: string, fallbackSlug: string): Post {
-  const { data, content } = matter(raw);
+  const { data, content } = parseFrontmatter(raw);
   return {
     frontmatter: {
-      title: data.title ?? fallbackSlug,
+      title: (data.title as string) ?? fallbackSlug,
       date: normalizeDate(data.date),
-      slug: data.slug ?? fallbackSlug,
-      hero: data.hero,
-      excerpt: data.excerpt,
+      slug: (data.slug as string) ?? fallbackSlug,
+      hero: data.hero as string | undefined,
+      excerpt: data.excerpt as string | undefined,
     },
     body: content.trim(),
   };
