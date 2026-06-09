@@ -8,8 +8,7 @@
   #root {
     min-height: 100%;
   }
-  body {
-    @apply font-serif antialiased;
+  html {
     background: linear-gradient(
       to bottom,
       #1a3047 0%,
@@ -18,7 +17,11 @@
       #02060d 85%,
       #000206 100%
     );
-    background-attachment: scroll;
+    background-attachment: fixed;
+    background-color: #000206;
+  }
+  body {
+    @apply font-serif antialiased;
   }
   a {
     @apply text-glow hover:text-glow-soft transition-colors;

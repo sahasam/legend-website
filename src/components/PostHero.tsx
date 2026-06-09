@@ -3,6 +3,20 @@ import { heroes } from '../scene/heroes';
 
 export function PostHero({ hero }: { hero?: string }) {
   if (!hero) return null;
+
+  if (hero.startsWith('/') || hero.startsWith('http')) {
+    return (
+      <div className="w-full overflow-hidden rounded-sm">
+        <img
+          src={hero}
+          alt=""
+          className="w-full object-cover"
+          style={{ maxHeight: '480px', objectPosition: 'center' }}
+        />
+      </div>
+    );
+  }
+
   const Component = heroes[hero];
   if (!Component) return null;
   return (

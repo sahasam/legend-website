@@ -1,6 +1,6 @@
 ---
 title: hello, from underwater
-date: 2026-06-05
+date: 2026-03-01
 slug: hello-world
 hero: jellyfish
 excerpt: a first signal blinking back from the abyss.

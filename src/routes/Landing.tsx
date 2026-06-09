@@ -36,7 +36,7 @@ export function Landing() {
           >
             engineer, occasional essayist, collector of half-formed ideas.
           </p>
-          <div className="mt-12 flex justify-center gap-6 font-sans text-sm uppercase tracking-widest">
+          <div className="mt-12 hidden justify-center gap-6 font-sans text-sm uppercase tracking-widest md:flex">
             <Link to="/writing" className="border-b border-glow/40 pb-1">
               read
             </Link>
