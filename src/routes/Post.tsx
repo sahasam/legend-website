@@ -34,10 +34,9 @@ export function Post() {
           {post.frontmatter.date}
         </time>
         <h1
-          className="mt-4 font-display text-4xl italic text-glow-soft md:text-5xl"
+          className="mt-4 font-sans text-4xl text-glow-soft md:text-5xl"
           style={{
-            fontWeight: 350,
-            fontVariationSettings: '"opsz" 144, "SOFT" 100',
+            fontWeight: 300,
             lineHeight: 1.1,
           }}
         >
