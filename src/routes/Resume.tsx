@@ -80,16 +80,16 @@ const focus = [
 
 export function Resume() {
   return (
-    <section className="mx-auto max-w-3xl px-6 pt-32 pb-32">
+    <section className="mx-auto max-w-3xl px-6 pt-20 pb-32 md:pt-32">
       <motion.header
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between md:gap-12"
+        className="flex flex-col items-start gap-2"
       >
-        <div>
+        <div className="flex w-full items-center justify-between gap-4 md:gap-12">
           <h1
-            className="font-caveat text-5xl md:text-7xl"
+            className="font-caveat text-4xl md:text-7xl"
             style={{
               fontWeight: 400,
               letterSpacing: '0.02em',
@@ -99,15 +99,15 @@ export function Resume() {
           >
             sahas munamala
           </h1>
-          <p className="mt-6 font-sans text-xs uppercase tracking-[0.4em] text-glow-soft/60">
-            engineer · systems · networks
-          </p>
+          <div className="w-24 shrink-0 md:w-40" aria-hidden>
+            <Suspense fallback={<div className="h-24 w-full md:h-40" />}>
+              <Nautilus className="h-24 w-full md:h-40" />
+            </Suspense>
+          </div>
         </div>
-        <div className="w-32 shrink-0 md:w-40" aria-hidden>
-          <Suspense fallback={<div className="h-32 w-full md:h-40" />}>
-            <Nautilus className="h-32 w-full md:h-40" />
-          </Suspense>
-        </div>
+        <p className="font-sans text-xs uppercase tracking-[0.4em] text-glow-soft/60">
+          engineer · systems · networks
+        </p>
       </motion.header>
 
       <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-3 font-sans text-sm text-glow-soft/75">

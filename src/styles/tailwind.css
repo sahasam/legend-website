@@ -8,6 +8,9 @@
   #root {
     min-height: 100%;
   }
+  html {
+    background-color: #1a3047;
+  }
   body {
     @apply font-serif antialiased;
     background: linear-gradient(
