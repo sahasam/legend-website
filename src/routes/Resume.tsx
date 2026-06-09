@@ -175,7 +175,7 @@ export function Resume() {
               <div className="flex flex-wrap items-baseline justify-between gap-4">
                 <div>
                   <h3
-                    className="font-display text-2xl italic text-glow-soft md:text-3xl"
+                    className="font-sans text-2xl text-glow-soft md:text-3xl"
                     style={{
                       fontWeight: 400,
                       fontVariationSettings: '"opsz" 72, "SOFT" 100',
@@ -207,7 +207,7 @@ export function Resume() {
       {/* EDUCATION */}
       <div className="mt-24">
         <h3
-          className="font-display text-2xl italic text-glow-soft md:text-3xl"
+          className="font-sans text-2xl text-glow-soft md:text-3xl"
           style={{
             fontWeight: 400,
             fontVariationSettings: '"opsz" 72, "SOFT" 100',

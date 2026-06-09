@@ -8,7 +8,7 @@ export function About() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="font-display text-5xl italic text-glow-soft md:text-6xl"
+        className="font-sans text-5xl text-glow-soft md:text-6xl"
         style={{ fontWeight: 350, fontVariationSettings: '"opsz" 144, "SOFT" 100' }}
       >
         about
@@ -21,7 +21,7 @@ export function About() {
       </p>
 
       <h2
-        className="mt-16 font-display text-2xl italic text-glow md:text-3xl"
+        className="mt-16 font-sans text-2xl text-glow md:text-3xl"
         style={{ fontWeight: 400, fontVariationSettings: '"opsz" 72, "SOFT" 100' }}
       >
         currently
@@ -35,7 +35,7 @@ export function About() {
       </p>
 
       <h2
-        className="mt-16 font-display text-2xl italic text-glow md:text-3xl"
+        className="mt-16 font-sans text-2xl text-glow md:text-3xl"
         style={{ fontWeight: 400, fontVariationSettings: '"opsz" 72, "SOFT" 100' }}
       >
         i touch grass too
@@ -48,7 +48,7 @@ export function About() {
       </p>
 
       <h2
-        className="mt-16 font-display text-2xl italic text-glow md:text-3xl"
+        className="mt-16 font-sans text-2xl text-glow md:text-3xl"
         style={{ fontWeight: 400, fontVariationSettings: '"opsz" 72, "SOFT" 100' }}
       >
         contact
