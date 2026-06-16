@@ -2,7 +2,7 @@
 title: My Experience at an AI Hackathon
 date: 2026-03-22
 slug: ai-hackathon
-hero: /images/ai-hackathon-hero.jpg
+hero: ./hero.jpg
 excerpt: I got access to ~$500,000 worth of NVIDIA B200 compute last weekend.
 ---
 
@@ -20,11 +20,11 @@ I wanted to figure out the energy and cost efficiency tradeoffs to outsource dec
 
 We had a couple interesting results. First is that chain of thought and decoding tokens consume far more energy than we anticipated. When multiple agents are talking through a problem and reaching an agreement, if they don't know the answer to the question quickly, consensus does not help. **Idiots don't make idiots smarter. Bureaucracy doesn't save these agents either.**
 
-![Energy consumption across agent configurations](/images/ai-hackathon-energy-chart.png)
+![Energy consumption across agent configurations](./energy-chart.png)
 
 The second one was mostly the work of my partner Sabareesh, who took Andrej Karpathy's [auto-research project](https://github.com/karpathy/autoresearch) and scaled it up to run on 8 top of the line B200 GPUs. Learning about this project, and seeing Sabareesh set it up so quickly, did two things for me. First it mesmerized me and showed how useless my AI workflows were, and it cemented in my mind (along with talking with many people about their hacks) where all of this is going: closing the loop between dataset generation/cleaning, hyperparameter tuning, and post-training fine tuning, into a self-improving AI loop. AGI is a term I need to be careful throwing around, but we are approaching cognitive growth loops so much faster than I anticipated.
 
-![Karpathy's auto-research loop](/images/ai-hackathon-autoresearch.jpg)
+![Karpathy's auto-research loop](./autoresearch.jpg)
 
 Hyperparameters are merely one part of an LLM's structure. And if hyperparameter search can be done with an AI agent, that's fundamental evidence that AI agents can recreate the step functions we see with technological progress, and even evolution on larger timescales.
 
