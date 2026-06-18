@@ -25,7 +25,7 @@ export function Post() {
   return (
     <article className="mx-auto max-w-2xl px-6 pt-28 pb-24">
       <ReadingDescent />
-      <PostHero hero={post.frontmatter.hero} />
+      <PostHero hero={post.frontmatter.hero} title={post.frontmatter.title} />
       <motion.header
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}

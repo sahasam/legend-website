@@ -40,11 +40,12 @@ function resolveAsset(src: string, dir: string): string {
   return postImages[full] ?? src;
 }
 
-// Rewrite relative image sources in markdown body to resolved URLs.
+// Rewrite relative image sources in markdown body to resolved URLs. The trailing
+// group keeps any optional title (e.g. ![alt](./x.png "caption")) untouched.
 function resolveBodyImages(body: string, dir: string): string {
   return body.replace(
-    /(!\[[^\]]*\]\()([^)\s]+)(\))/g,
-    (_match, prefix, src, suffix) => `${prefix}${resolveAsset(src, dir)}${suffix}`,
+    /(!\[[^\]]*\]\()([^)\s]+)([^)]*\))/g,
+    (_match, prefix, src, rest) => `${prefix}${resolveAsset(src, dir)}${rest}`,
   );
 }
 
@@ -76,7 +77,12 @@ const posts: Post[] = Object.entries(rawPosts)
     const fallbackSlug = dirOf(path).split('/').pop() ?? 'untitled';
     return parse(raw, path, fallbackSlug);
   })
-  .sort((a, b) => (a.frontmatter.date < b.frontmatter.date ? 1 : -1));
+  // Newest first; slug breaks ties so posts sharing a date keep a stable order.
+  .sort(
+    (a, b) =>
+      b.frontmatter.date.localeCompare(a.frontmatter.date) ||
+      a.frontmatter.slug.localeCompare(b.frontmatter.slug),
+  );
 
 export function getAllPosts(): Post[] {
   return posts;
