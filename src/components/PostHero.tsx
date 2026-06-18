@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { heroes } from '../scene/heroes';
 
-export function PostHero({ hero }: { hero?: string }) {
+export function PostHero({ hero, title }: { hero?: string; title?: string }) {
   if (!hero) return null;
 
   if (hero.startsWith('/') || hero.startsWith('http')) {
@@ -9,7 +9,7 @@ export function PostHero({ hero }: { hero?: string }) {
       <div className="w-full overflow-hidden rounded-sm">
         <img
           src={hero}
-          alt=""
+          alt={title ? `Hero image for “${title}”` : ''}
           className="w-full object-cover"
           style={{ maxHeight: '480px', objectPosition: 'center' }}
         />
