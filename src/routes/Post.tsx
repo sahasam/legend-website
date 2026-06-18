@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { getPostBySlug } from '../content/loadPosts';
 import { RenderBody } from '../content/renderBody';
 import { PostHero } from '../components/PostHero';
+import { ReadingDescent } from '../components/ReadingDescent';
 
 export function Post() {
   const { slug } = useParams<{ slug: string }>();
@@ -23,6 +24,7 @@ export function Post() {
 
   return (
     <article className="mx-auto max-w-2xl px-6 pt-28 pb-24">
+      <ReadingDescent />
       <PostHero hero={post.frontmatter.hero} />
       <motion.header
         initial={{ opacity: 0, y: 8 }}
@@ -30,7 +32,16 @@ export function Post() {
         transition={{ duration: 0.7 }}
         className="mt-6"
       >
-        <time className="font-sans text-xs uppercase tracking-widest text-glow-soft/50">
+        <Link
+          to="/writing"
+          className="group mb-6 inline-flex items-center gap-1.5 font-sans text-xs uppercase tracking-widest text-glow-soft/50 transition-colors hover:text-glow"
+        >
+          <span aria-hidden className="transition-transform group-hover:-translate-x-0.5">
+            ←
+          </span>
+          Writing
+        </Link>
+        <time className="block font-sans text-xs uppercase tracking-widest text-glow-soft/50">
           {post.frontmatter.date}
         </time>
         <h1
@@ -46,9 +57,15 @@ export function Post() {
       <div className="mt-12">
         <RenderBody body={post.body} />
       </div>
-      <div className="mt-20">
-        <Link to="/writing" className="font-sans text-sm text-glow/80">
-          ← writing
+      <div className="mt-20 border-t border-glow/10 pt-10">
+        <Link
+          to="/writing"
+          className="group inline-flex items-center gap-2 rounded-full border border-glow/30 px-5 py-2.5 font-sans text-sm text-glow/90 transition-colors hover:border-glow/60 hover:bg-glow/10 hover:text-glow"
+        >
+          <span aria-hidden className="transition-transform group-hover:-translate-x-0.5">
+            ←
+          </span>
+          More writing
         </Link>
       </div>
     </article>
