@@ -22,7 +22,7 @@ export function Landing() {
             field notes from underwater
           </p>
           <h1
-            className="mt-8 font-caveat text-6xl md:text-8xl"
+            className="mt-8 font-caveat text-6xl short:mt-3 short:text-4xl md:text-8xl"
             style={{
               fontWeight: 400,
               letterSpacing: '0.02em',
@@ -33,7 +33,7 @@ export function Landing() {
             sahas munamala
           </h1>
           <p
-            className="mx-auto mt-8 max-w-md font-display text-lg text-glow-soft/80 md:text-xl"
+            className="mx-auto mt-8 max-w-md font-display text-lg text-glow-soft/80 short:mt-3 short:text-sm md:text-xl"
             style={{
               fontWeight: 350,
               fontVariationSettings: '"opsz" 24',
@@ -41,7 +41,7 @@ export function Landing() {
           >
             engineer, occasional essayist, collector of half-formed ideas.
           </p>
-          <div className="mt-12 hidden justify-center gap-6 font-sans text-sm uppercase tracking-widest md:flex">
+          <div className="mt-12 hidden justify-center gap-6 font-sans text-sm uppercase tracking-widest short:mt-6 md:flex">
             <Link to="/writing" className="border-b border-glow/40 pb-1">
               read
             </Link>

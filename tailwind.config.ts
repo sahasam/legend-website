@@ -4,6 +4,11 @@ export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
+      screens: {
+        // Landscape phones — short viewports where the hero must shrink to fit
+        // the locked (non-scrolling) frame. Appended last so it wins over `md:`.
+        short: { raw: '(max-height: 500px)' },
+      },
       colors: {
         abyss: {
           50: '#1b2a47',
