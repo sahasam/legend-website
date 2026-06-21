@@ -1,12 +1,17 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { LandingScene } from '../scene/LandingScene';
+import { useScrollLock } from '../hooks/useScrollLock';
 
 export function Landing() {
+  // The title page is a fixed animated frame — lock scrolling so the mobile
+  // toolbar never toggles and resizes the WebGL canvas (which jitters the layers).
+  useScrollLock();
+
   return (
     <>
       <LandingScene />
-      <section className="grain relative flex min-h-screen flex-col items-center justify-center px-6 text-center">
+      <section className="grain fixed inset-0 flex flex-col items-center justify-center px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
