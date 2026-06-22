@@ -43,6 +43,18 @@ const projects: ProjectMeta[] = [
     ),
     posts: [
       {
+        slug: 'what-is-open-atomic-ethernet',
+        title: 'What is Open Atomic Ethernet?',
+        date: '2025-08-15',
+        excerpt:
+          "Most networks leave you guessing after a failure — did the message arrive or not? OAE removes the guess: every message either commits completely or leaves no trace.",
+        Component: lazy(() =>
+          import('./open-atomic-ethernet/WhatIsOae').then((m) => ({
+            default: m.WhatIsOae,
+          })),
+        ),
+      },
+      {
         slug: 'fms-firing-squad',
         title: 'A Firing Squad at Flash Memory Summit',
         date: '2025-10-27',
