@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import type { ComponentType, LazyExoticComponent } from 'react';
 import oaeDemoPhoto from './open-atomic-ethernet/assets/demo-photo.jpg';
+import oaeLogo from './open-atomic-ethernet/assets/oae-logo.png';
 
 // Source of truth for projects and their posts. Unlike the writing index (markdown
 // + frontmatter), project posts are bespoke React pages — so a typed registry is
@@ -13,6 +14,8 @@ export type PostMeta = {
   date: string; // ISO yyyy-mm-dd
   excerpt: string;
   hero?: string; // imported asset URL
+  heroFit?: 'cover' | 'contain'; // 'contain' for logo-style art; default 'cover'
+  heroBlend?: boolean; // screen-blend bright-on-black art onto the backdrop
   Component: LazyExoticComponent<ComponentType>;
 };
 
@@ -48,6 +51,9 @@ const projects: ProjectMeta[] = [
         date: '2025-08-15',
         excerpt:
           "Most networks leave you guessing after a failure — did the message arrive or not? OAE removes the guess: every message either commits completely or leaves no trace.",
+        hero: oaeLogo,
+        heroFit: 'contain',
+        heroBlend: true,
         Component: lazy(() =>
           import('./open-atomic-ethernet/WhatIsOae').then((m) => ({
             default: m.WhatIsOae,

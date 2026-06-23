@@ -3,6 +3,7 @@ import { ReadingDescent } from '../../components/ReadingDescent';
 import { PostChrome } from '../components/PostChrome';
 import { Prose } from '../components/Prose';
 import { AtomicLinkDiagram } from './AtomicLinkDiagram';
+import { OaeLogo } from './OaeLogo';
 
 // Bespoke explainer post for Open Atomic Ethernet — the foundational "what is it"
 // piece. Draws on the project's design concepts (atomicity on the wire, two-way
@@ -13,6 +14,10 @@ export function WhatIsOae() {
   return (
     <article className="mx-auto max-w-2xl px-6 pt-28 pb-24">
       <ReadingDescent />
+
+      <div className="mx-auto mb-2 w-2/3 max-w-[320px]">
+        <OaeLogo priority />
+      </div>
 
       <PostChrome
         projectSlug="open-atomic-ethernet"
@@ -27,7 +32,7 @@ export function WhatIsOae() {
             Every distributed system eventually hits the same wall: you sent a message,
             and you don't know what happened to it. No acknowledgment came back. Was the
             message lost? Did it arrive and the acknowledgment got lost on the way home?
-            You can't tell — and that single ambiguity is the seed of almost all the
+            You can't tell, and that single ambiguity is the seed of almost all the
             complexity in distributed computing. Timeouts, retries, deduplication,
             idempotency keys, consensus protocols: most of that machinery exists to paper
             over the fact that the network won't give you a straight answer.
@@ -35,11 +40,11 @@ export function WhatIsOae() {
 
           <p>
             <strong>Open Atomic Ethernet (OAE)</strong> is a link-layer protocol that
-            gives you the straight answer. Every message is an atomic transaction: it
-            either <em>commits</em> — both sides know it arrived and agree it's final — or
+            deterministically delivers. Every message is an atomic transaction: it
+            either <em>commits</em> and both sides know it arrived and agree it's final, or
             it <em>rolls back</em>, leaving no trace on the receiver and only a record of
             the attempt on the sender. There is no third state. The "it might have
-            arrived" that haunts every other network simply doesn't exist.
+            arrived" that haunts every other network simply doesn't exist, because OAE stops information loss at the level it actually occurs -- Layer 2: Ethernet.
           </p>
 
           <h2>One state machine, not two</h2>

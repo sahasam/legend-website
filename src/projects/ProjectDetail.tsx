@@ -27,7 +27,7 @@ export function ProjectDetail() {
   const { Overview } = project;
 
   return (
-    <section className="mx-auto max-w-3xl px-6 pt-28 pb-24">
+    <section className="mx-auto max-w-4xl px-6 pt-28 pb-24">
       <Link
         to="/projects"
         className="group mb-10 inline-flex items-center gap-1.5 font-sans text-xs uppercase tracking-widest text-glow-soft/50 transition-colors hover:text-glow"
@@ -51,9 +51,9 @@ export function ProjectDetail() {
         <h2 className="font-sans text-xs uppercase tracking-[0.25em] text-glow/50">
           writeups
         </h2>
-        <ul className="mt-6 space-y-8">
+        <ul className="mt-6 grid gap-5 sm:grid-cols-2">
           {project.posts.map((post) => (
-            <li key={post.slug}>
+            <li key={post.slug} className="h-full">
               <PostCard projectSlug={project.slug} post={post} />
             </li>
           ))}

@@ -24,18 +24,21 @@ export function PostCard({
   return (
     <Link
       to={`/projects/${projectSlug}/${post.slug}`}
-      className="group block overflow-hidden rounded-lg border border-glow/15 bg-abyss-300/40 transition-all duration-300 hover:-translate-y-0.5 hover:border-glow/35 hover:bg-abyss-200/60 hover:shadow-[0_0_28px_-8px_rgba(125,249,255,0.4)]"
+      className="group flex h-full flex-col overflow-hidden rounded-lg border border-glow/15 bg-abyss-300/40 transition-all duration-300 hover:-translate-y-0.5 hover:border-glow/35 hover:bg-abyss-200/60 hover:shadow-[0_0_28px_-8px_rgba(125,249,255,0.4)]"
     >
       {post.hero && (
         <div className="aspect-[16/9] w-full overflow-hidden">
           <img
             src={post.hero}
             alt=""
-            className="h-full w-full object-cover opacity-85 transition-all duration-500 group-hover:scale-[1.03] group-hover:opacity-100"
+            className={`h-full w-full opacity-85 transition-all duration-500 group-hover:scale-[1.03] group-hover:opacity-100 ${
+              post.heroFit === 'contain' ? 'object-contain p-5' : 'object-cover'
+            }`}
+            style={post.heroBlend ? { mixBlendMode: 'screen' } : undefined}
           />
         </div>
       )}
-      <div className="p-6">
+      <div className="flex flex-1 flex-col p-6">
         <div className="flex items-center justify-between gap-4">
           <time className="font-sans text-xs uppercase tracking-widest text-glow-soft/40">
             {formatDate(post.date)}
