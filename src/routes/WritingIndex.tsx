@@ -1,17 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getAllPosts } from '../content/loadPosts';
-
-// "2026-06-16" -> "Jun 16, 2026" (parsed by parts to dodge timezone shifts).
-function formatDate(iso: string): string {
-  const [y, m, d] = iso.split('-').map(Number);
-  if (!y || !m || !d) return iso;
-  const months = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-  ];
-  return `${months[m - 1]} ${d}, ${y}`;
-}
+import { formatDate } from '../lib/formatDate';
 
 export function WritingIndex() {
   const posts = getAllPosts();

@@ -1,16 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-
-// "2025-10-27" -> "Oct 27, 2025" (parsed by parts to dodge timezone shifts).
-function formatDate(iso: string): string {
-  const [y, m, d] = iso.split('-').map(Number);
-  if (!y || !m || !d) return iso;
-  const months = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-  ];
-  return `${months[m - 1]} ${d}, ${y}`;
-}
+import { formatDate } from '../../lib/formatDate';
 
 // Shared header for a bespoke project post: a back-link to the parent project,
 // the date, and the title. Each crafted post page renders this at its top so the

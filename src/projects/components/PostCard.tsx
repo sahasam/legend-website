@@ -1,16 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { PostMeta } from '../registry';
-
-// "2025-10-27" -> "Oct 27, 2025"
-function formatDate(iso: string): string {
-  const [y, m, d] = iso.split('-').map(Number);
-  if (!y || !m || !d) return iso;
-  const months = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-  ];
-  return `${months[m - 1]} ${d}, ${y}`;
-}
+import { formatDate } from '../../lib/formatDate';
 
 // A featured post on a project's grand landing page. Larger and more image-led
 // than a writing-index row — these are the showpieces of a project.
