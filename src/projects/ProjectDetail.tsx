@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { getProject } from './registry';
+import { getProject, isExternalProject } from './registry';
 import { PostCard } from './components/PostCard';
 import { NotFoundNotice } from '../components/NotFoundNotice';
 
@@ -12,7 +12,8 @@ export function ProjectDetail() {
   const { projectSlug } = useParams<{ projectSlug: string }>();
   const project = projectSlug ? getProject(projectSlug) : undefined;
 
-  if (!project) {
+  // External projects have no in-site landing — they only exist as outbound cards.
+  if (!project || isExternalProject(project)) {
     return <NotFoundNotice to="/projects" label="back to projects" />;
   }
 

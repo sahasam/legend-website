@@ -19,15 +19,32 @@ export type PostMeta = {
   Component: LazyExoticComponent<ComponentType<PostPageProps>>;
 };
 
-export type ProjectMeta = {
+type BaseProject = {
   slug: string;
   title: string;
   year: string;
   summary: string; // 1–2 sentences, used on the /projects index card
   tags?: string[];
+};
+
+// A project with an in-site grand landing and up to 3 bespoke posts.
+export type InternalProject = BaseProject & {
+  href?: undefined;
   Overview: LazyExoticComponent<ComponentType>; // project-specific grand intro
   posts: PostMeta[]; // ≤ 3 — see MAX_POSTS guard below
 };
+
+// A project that lives elsewhere (a repo, an off-site writeup). Its /projects card
+// links straight out in a new tab; there's no in-site landing or posts.
+export type ExternalProject = BaseProject & {
+  href: string;
+};
+
+export type ProjectMeta = InternalProject | ExternalProject;
+
+export function isExternalProject(p: ProjectMeta): p is ExternalProject {
+  return p.href !== undefined;
+}
 
 // Props the route resolver passes into every bespoke post page, so a post reads
 // its title/date/back-link from the registry rather than re-declaring them.
@@ -80,12 +97,22 @@ const projects: ProjectMeta[] = [
       },
     ],
   },
+  // To list an external project (a repo or off-site writeup), add an entry with an
+  // `href` instead of Overview/posts — its card links straight out in a new tab:
+  // {
+  //   slug: 'some-repo',
+  //   title: 'Some Repo',
+  //   year: '2024',
+  //   summary: 'A one-liner about what it is.',
+  //   tags: ['rust'],
+  //   href: 'https://github.com/sahasam/some-repo',
+  // },
 ];
 
-// Soft dev-time guard: a project is meant to hold at most three posts.
+// Soft dev-time guard: an internal project is meant to hold at most three posts.
 if (import.meta.env.DEV) {
   for (const p of projects) {
-    if (p.posts.length > MAX_POSTS) {
+    if (p.href === undefined && p.posts.length > MAX_POSTS) {
       console.warn(
         `[projects] "${p.slug}" has ${p.posts.length} posts; max is ${MAX_POSTS}.`,
       );
@@ -106,9 +133,10 @@ export function getProject(slug: string): ProjectMeta | undefined {
 export function getPost(
   projectSlug: string,
   postSlug: string,
-): { project: ProjectMeta; post: PostMeta } | undefined {
+): { project: InternalProject; post: PostMeta } | undefined {
   const project = getProject(projectSlug);
-  const post = project?.posts.find((p) => p.slug === postSlug);
-  if (!project || !post) return undefined;
+  if (!project || isExternalProject(project)) return undefined;
+  const post = project.posts.find((p) => p.slug === postSlug);
+  if (!post) return undefined;
   return { project, post };
 }

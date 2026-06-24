@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
-import { getPost, getProject } from './registry';
+import { getPost, getProject, isExternalProject } from './registry';
 import { NotFoundNotice } from '../components/NotFoundNotice';
 
 // /projects/:projectSlug/:postSlug — thin resolver. Looks up the bespoke post in
@@ -17,8 +17,9 @@ export function ProjectPost() {
     projectSlug && postSlug ? getPost(projectSlug, postSlug) : undefined;
 
   if (!match) {
+    // Only an internal project has a landing to send the reader back to.
     const project = projectSlug ? getProject(projectSlug) : undefined;
-    return project ? (
+    return project && !isExternalProject(project) ? (
       <NotFoundNotice to={`/projects/${project.slug}`} label={`back to ${project.title}`} />
     ) : (
       <NotFoundNotice to="/projects" label="back to projects" />
