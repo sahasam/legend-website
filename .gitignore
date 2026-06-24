@@ -10,3 +10,9 @@ dist-ssr
 *.tsbuildinfo
 .wrangler
 .claude
+
+# Source docs for content, not part of the site
+FMS Writeup.pages
+*.pages
+
+unknown.png

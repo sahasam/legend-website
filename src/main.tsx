@@ -18,8 +18,14 @@ const WritingIndex = lazy(() =>
 );
 const Post = lazy(() => import('./routes/Post').then((m) => ({ default: m.Post })));
 const About = lazy(() => import('./routes/About').then((m) => ({ default: m.About })));
-const Projects = lazy(() =>
-  import('./routes/Projects').then((m) => ({ default: m.Projects })),
+const ProjectIndex = lazy(() =>
+  import('./projects/ProjectIndex').then((m) => ({ default: m.ProjectIndex })),
+);
+const ProjectDetail = lazy(() =>
+  import('./projects/ProjectDetail').then((m) => ({ default: m.ProjectDetail })),
+);
+const ProjectPost = lazy(() =>
+  import('./projects/ProjectPost').then((m) => ({ default: m.ProjectPost })),
 );
 const Resume = lazy(() => import('./routes/Resume').then((m) => ({ default: m.Resume })));
 
@@ -50,7 +56,17 @@ const router = createBrowserRouter([
       { path: 'writing', element: <WritingIndex />, errorElement: <ErrorBoundary /> },
       { path: 'writing/:slug', element: <Post />, errorElement: <ErrorBoundary /> },
       { path: 'about', element: <About />, errorElement: <ErrorBoundary /> },
-      { path: 'projects', element: <Projects />, errorElement: <ErrorBoundary /> },
+      { path: 'projects', element: <ProjectIndex />, errorElement: <ErrorBoundary /> },
+      {
+        path: 'projects/:projectSlug',
+        element: <ProjectDetail />,
+        errorElement: <ErrorBoundary />,
+      },
+      {
+        path: 'projects/:projectSlug/:postSlug',
+        element: <ProjectPost />,
+        errorElement: <ErrorBoundary />,
+      },
       { path: 'resume', element: <Resume />, errorElement: <ErrorBoundary /> },
       { path: '*', element: <ErrorBoundary /> },
     ],
