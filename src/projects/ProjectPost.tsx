@@ -1,10 +1,13 @@
 import { Suspense } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { getPost } from './registry';
+import { useParams } from 'react-router-dom';
+import { getPost, getProject } from './registry';
+import { NotFoundNotice } from '../components/NotFoundNotice';
 
-// /projects/:projectSlug/:postSlug — thin resolver. Looks up the bespoke post
-// Component in the registry and renders it; the page's layout is owned by that
-// component. Unknown slugs get an on-brand not-found, matching the writing post.
+// /projects/:projectSlug/:postSlug — thin resolver. Looks up the bespoke post in
+// the registry and renders its Component, passing the resolved project/post so the
+// page reads its own metadata rather than hardcoding it. Unknown slugs get an
+// on-brand not-found that sends the reader back to the project they were browsing
+// when that project exists, otherwise to the projects index.
 export function ProjectPost() {
   const { projectSlug, postSlug } = useParams<{
     projectSlug: string;
@@ -14,15 +17,11 @@ export function ProjectPost() {
     projectSlug && postSlug ? getPost(projectSlug, postSlug) : undefined;
 
   if (!match) {
-    return (
-      <section className="mx-auto max-w-2xl px-6 pt-32 pb-24">
-        <p className="font-serif text-glow-soft/70">
-          this drifted out of reach.{' '}
-          <Link to="/projects" className="underline">
-            back to projects
-          </Link>
-        </p>
-      </section>
+    const project = projectSlug ? getProject(projectSlug) : undefined;
+    return project ? (
+      <NotFoundNotice to={`/projects/${project.slug}`} label={`back to ${project.title}`} />
+    ) : (
+      <NotFoundNotice to="/projects" label="back to projects" />
     );
   }
 
@@ -30,7 +29,7 @@ export function ProjectPost() {
 
   return (
     <Suspense fallback={<div className="min-h-screen" />}>
-      <Component />
+      <Component project={match.project} post={match.post} />
     </Suspense>
   );
 }

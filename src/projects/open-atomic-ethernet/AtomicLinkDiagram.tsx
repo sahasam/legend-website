@@ -8,9 +8,22 @@ import { motion, useReducedMotion } from 'framer-motion';
 // the shared, entangled state. Reduced-motion: token rests at center, both lit.
 
 const CYCLE = 3.2; // seconds for a full A -> B -> A round trip
+const DIM = '0 0 6px 0px rgba(125,249,255,0.25)';
+const BRIGHT = '0 0 18px 4px rgba(125,249,255,0.65)';
 
-function Node({ label, glowDelay }: { label: string; glowDelay: number }) {
-  const reduce = useReducedMotion();
+// A node glows bright at the moment the shuttling token reaches it. The token
+// sweeps left(0%)->right(100%)->left over one CYCLE, so it sits on A at t=0/1 and
+// on B at t=0.5. `peakAt` is that arrival fraction; the keyframes below peak there.
+function Node({
+  label,
+  peakAt,
+  reduce,
+}: {
+  label: string;
+  peakAt: 0 | 0.5;
+  reduce: boolean | null;
+}) {
+  const shadows = peakAt === 0 ? [BRIGHT, DIM, BRIGHT] : [DIM, BRIGHT, DIM];
   return (
     <div className="flex flex-col items-center gap-2">
       <motion.span
@@ -18,18 +31,12 @@ function Node({ label, glowDelay }: { label: string; glowDelay: number }) {
         animate={
           reduce
             ? { boxShadow: '0 0 10px 1px rgba(125,249,255,0.4)' }
-            : {
-                boxShadow: [
-                  '0 0 6px 0px rgba(125,249,255,0.25)',
-                  '0 0 18px 4px rgba(125,249,255,0.65)',
-                  '0 0 6px 0px rgba(125,249,255,0.25)',
-                ],
-              }
+            : { boxShadow: shadows }
         }
         transition={
           reduce
             ? undefined
-            : { duration: CYCLE, repeat: Infinity, times: [0, 0.12, 0.4], delay: glowDelay }
+            : { duration: CYCLE, repeat: Infinity, times: [0, 0.5, 1], ease: 'easeInOut' }
         }
       >
         {label}
@@ -45,7 +52,7 @@ export function AtomicLinkDiagram() {
     <figure className="my-10">
       <div className="relative overflow-hidden rounded-lg border border-glow/15 bg-abyss-400/50 px-8 py-12">
         <div className="relative flex items-center justify-between">
-          <Node label="A" glowDelay={CYCLE / 2} />
+          <Node label="A" peakAt={0} reduce={reduce} />
 
           {/* the link, with the shared state token shuttling across it */}
           <div className="relative mx-4 h-px flex-1 bg-glow/20">
@@ -63,7 +70,7 @@ export function AtomicLinkDiagram() {
             </motion.div>
           </div>
 
-          <Node label="B" glowDelay={0} />
+          <Node label="B" peakAt={0.5} reduce={reduce} />
         </div>
 
         <p className="mt-8 text-center font-sans text-xs uppercase tracking-widest text-glow-soft/45">

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { ReadingDescent } from '../../components/ReadingDescent';
-import { PostChrome } from '../components/PostChrome';
 import { Prose } from '../components/Prose';
+import { PostLayout } from '../components/PostLayout';
+import type { PostPageProps } from '../registry';
 import { AtomicLinkDiagram } from './AtomicLinkDiagram';
 import { OaeLogo } from './OaeLogo';
 
@@ -10,24 +10,18 @@ import { OaeLogo } from './OaeLogo';
 // link semantics, reversibility, perfect information feedback, clock-from-
 // interaction) in plain language. Deliberately concept-only: no company/product
 // internals, no unverified business claims.
-export function WhatIsOae() {
+export function WhatIsOae({ project, post }: PostPageProps) {
   return (
-    <article className="mx-auto max-w-2xl px-6 pt-28 pb-24">
-      <ReadingDescent />
-
-      <div className="mx-auto mb-2 w-2/3 max-w-[320px]">
-        <OaeLogo priority />
-      </div>
-
-      <PostChrome
-        projectSlug="open-atomic-ethernet"
-        projectTitle="Open Atomic Ethernet"
-        title="What is Open Atomic Ethernet?"
-        date="2025-08-15"
-      />
-
-      <div className="mt-12">
-        <Prose>
+    <PostLayout
+      project={project}
+      post={post}
+      hero={
+        <div className="mx-auto w-2/3 max-w-[320px]">
+          <OaeLogo priority />
+        </div>
+      }
+    >
+      <Prose>
           <p>
             Every distributed system eventually hits the same wall: you sent a message,
             and you don't know what happened to it. No acknowledgment came back. Was the
@@ -124,20 +118,7 @@ export function WhatIsOae() {
             core idea has held up under every demo I've thrown at it: make the wire tell the
             truth, and most of distributed systems gets easier.
           </p>
-        </Prose>
-      </div>
-
-      <div className="mt-20 border-t border-glow/10 pt-10">
-        <Link
-          to="/projects/open-atomic-ethernet"
-          className="group inline-flex items-center gap-2 rounded-full border border-glow/30 px-5 py-2.5 font-sans text-sm text-glow/90 transition-colors hover:border-glow/60 hover:bg-glow/10 hover:text-glow"
-        >
-          <span aria-hidden className="transition-transform group-hover:-translate-x-0.5">
-            ←
-          </span>
-          Open Atomic Ethernet
-        </Link>
-      </div>
-    </article>
+      </Prose>
+    </PostLayout>
   );
 }

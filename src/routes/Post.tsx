@@ -4,22 +4,14 @@ import { getPostBySlug } from '../content/loadPosts';
 import { RenderBody } from '../content/renderBody';
 import { PostHero } from '../components/PostHero';
 import { ReadingDescent } from '../components/ReadingDescent';
+import { NotFoundNotice } from '../components/NotFoundNotice';
 
 export function Post() {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getPostBySlug(slug) : undefined;
 
   if (!post) {
-    return (
-      <section className="mx-auto max-w-2xl px-6 pt-32 pb-24">
-        <p className="font-serif text-glow-soft/70">
-          this drifted out of reach.{' '}
-          <Link to="/writing" className="underline">
-            back to writing
-          </Link>
-        </p>
-      </section>
-    );
+    return <NotFoundNotice to="/writing" label="back to writing" />;
   }
 
   return (

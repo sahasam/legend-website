@@ -16,18 +16,24 @@ export type PostMeta = {
   hero?: string; // imported asset URL
   heroFit?: 'cover' | 'contain'; // 'contain' for logo-style art; default 'cover'
   heroBlend?: boolean; // screen-blend bright-on-black art onto the backdrop
-  Component: LazyExoticComponent<ComponentType>;
+  Component: LazyExoticComponent<ComponentType<PostPageProps>>;
 };
 
 export type ProjectMeta = {
   slug: string;
   title: string;
   year: string;
-  tagline: string; // short line under the title on the grand landing page
   summary: string; // 1–2 sentences, used on the /projects index card
   tags?: string[];
   Overview: LazyExoticComponent<ComponentType>; // project-specific grand intro
   posts: PostMeta[]; // ≤ 3 — see MAX_POSTS guard below
+};
+
+// Props the route resolver passes into every bespoke post page, so a post reads
+// its title/date/back-link from the registry rather than re-declaring them.
+export type PostPageProps = {
+  project: ProjectMeta;
+  post: PostMeta;
 };
 
 const MAX_POSTS = 3;
@@ -37,7 +43,6 @@ const projects: ProjectMeta[] = [
     slug: 'open-atomic-ethernet',
     title: 'Open Atomic Ethernet',
     year: '2025',
-    tagline: 'Clock-free, fabric-level deterministic commits.',
     summary:
       'A network fabric that produces simultaneous, all-or-nothing action without a shared global clock — coordination derived from interaction, not timestamps.',
     tags: ['interconnect', 'distributed systems', 'hardware'],
@@ -88,8 +93,10 @@ if (import.meta.env.DEV) {
   }
 }
 
+// Newest first by year, so appending to the registry array doesn't surface an
+// older project above a newer one on the index.
 export function getAllProjects(): ProjectMeta[] {
-  return projects;
+  return [...projects].sort((a, b) => (a.year < b.year ? 1 : -1));
 }
 
 export function getProject(slug: string): ProjectMeta | undefined {

@@ -1,38 +1,29 @@
-import { Link } from 'react-router-dom';
-import { ReadingDescent } from '../../components/ReadingDescent';
-import { PostChrome } from '../components/PostChrome';
 import { Prose } from '../components/Prose';
+import { PostLayout } from '../components/PostLayout';
+import type { PostPageProps } from '../registry';
 import { FiringSquadDemo } from './FiringSquadDemo';
 import demoPhoto from './assets/demo-photo.jpg';
 
-// Bespoke post #1 of Open Atomic Ethernet: the Flash Memory Summit "firing squad"
-// demo writeup. Hand-built layout — photo hero, prose from the original writeup,
-// and the FiringSquadDemo visual dropped mid-article where the live demo was.
-export function FmsFiringSquad() {
+// Bespoke post of Open Atomic Ethernet: the Flash Memory Summit "firing squad"
+// demo writeup. Photo hero, prose from the original writeup, and the
+// FiringSquadDemo visual dropped mid-article where the live demo was.
+export function FmsFiringSquad({ project, post }: PostPageProps) {
   return (
-    <article className="mx-auto max-w-2xl px-6 pt-28 pb-24">
-      <ReadingDescent />
-
-      <div className="w-full overflow-hidden rounded-sm">
-        <img
-          src={demoPhoto}
-          alt="The Open Atomic Ethernet emulator on the show floor at Flash Memory Summit"
-          className="w-full object-cover"
-          style={{ maxHeight: '480px', objectPosition: 'center' }}
-        />
-      </div>
-
-      <div className="mt-6">
-        <PostChrome
-          projectSlug="open-atomic-ethernet"
-          projectTitle="Open Atomic Ethernet"
-          title="A Firing Squad at Flash Memory Summit"
-          date="2025-10-27"
-        />
-      </div>
-
-      <div className="mt-12">
-        <Prose>
+    <PostLayout
+      project={project}
+      post={post}
+      hero={
+        <div className="w-full overflow-hidden rounded-sm">
+          <img
+            src={demoPhoto}
+            alt="The Open Atomic Ethernet emulator on the show floor at Flash Memory Summit"
+            className="w-full object-cover"
+            style={{ maxHeight: '480px', objectPosition: 'center' }}
+          />
+        </div>
+      }
+    >
+      <Prose>
           <p>
             At Flash Memory Summit we live-demoed a distributed{' '}
             <em>firing squad</em> synchronization on our Open Atomic Ethernet (OAE)
@@ -95,20 +86,7 @@ export function FmsFiringSquad() {
             a practical primitive for robust, clock-free coordination in next-generation
             memory and interconnect stacks.
           </p>
-        </Prose>
-      </div>
-
-      <div className="mt-20 border-t border-glow/10 pt-10">
-        <Link
-          to="/projects/open-atomic-ethernet"
-          className="group inline-flex items-center gap-2 rounded-full border border-glow/30 px-5 py-2.5 font-sans text-sm text-glow/90 transition-colors hover:border-glow/60 hover:bg-glow/10 hover:text-glow"
-        >
-          <span aria-hidden className="transition-transform group-hover:-translate-x-0.5">
-            ←
-          </span>
-          Open Atomic Ethernet
-        </Link>
-      </div>
-    </article>
+      </Prose>
+    </PostLayout>
   );
 }

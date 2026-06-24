@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getProject } from './registry';
 import { PostCard } from './components/PostCard';
+import { NotFoundNotice } from '../components/NotFoundNotice';
 
 // /projects/:projectSlug — the grand project landing page. Renders the project's
 // own Overview (its custom hero/intro), then its posts as featured cards. Bigger
@@ -12,16 +13,7 @@ export function ProjectDetail() {
   const project = projectSlug ? getProject(projectSlug) : undefined;
 
   if (!project) {
-    return (
-      <section className="mx-auto max-w-2xl px-6 pt-32 pb-24">
-        <p className="font-serif text-glow-soft/70">
-          this drifted out of reach.{' '}
-          <Link to="/projects" className="underline">
-            back to projects
-          </Link>
-        </p>
-      </section>
-    );
+    return <NotFoundNotice to="/projects" label="back to projects" />;
   }
 
   const { Overview } = project;

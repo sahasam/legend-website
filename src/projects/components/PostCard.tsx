@@ -20,7 +20,7 @@ export function PostCard({
         <div className="aspect-[16/9] w-full overflow-hidden">
           <img
             src={post.hero}
-            alt=""
+            alt={post.title}
             className={`h-full w-full opacity-85 transition-all duration-500 group-hover:scale-[1.03] group-hover:opacity-100 ${
               post.heroFit === 'contain' ? 'object-contain p-5' : 'object-cover'
             }`}
