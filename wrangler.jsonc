@@ -8,12 +8,9 @@
     // Serve index.html for unknown paths so client-side routes
     // (e.g. /writing/:slug) resolve on direct visits and hard refreshes.
     "not_found_handling": "single-page-application"
-  },
-  // Attach both hostnames as Custom Domains. custom_domain:true makes Wrangler
-  // create/repair the proxied DNS record automatically on deploy — this is what
-  // was missing for www (apex was attached, www wasn't → 522).
-  "routes": [
-    { "pattern": "sahas.lol", "custom_domain": true },
-    { "pattern": "www.sahas.lol", "custom_domain": true }
-  ]
+  }
+  // Custom domains (sahas.lol, www.sahas.lol) are attached in the Cloudflare
+  // dashboard (Workers → legend-website → Domains & Routes), NOT here. Declaring
+  // them as `routes` makes the CI `wrangler deploy` try to register them and the
+  // domains/records API call fails the whole deploy. Add domains in the dashboard.
 }
