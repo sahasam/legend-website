@@ -10,6 +10,10 @@ React 18 + TypeScript (strict), react-three-fiber for the landing scene and
 per-post 3D hero accents, react-markdown for writing, Tailwind. Fully static
 build deployed to Cloudflare Workers static-assets. **No backend, no SSR.**
 
+Deeper reference (read before touching that area):
+- [`docs/deploy.md`](docs/deploy.md) — hosting, deploy model, custom domains, 522 triage.
+- [`docs/scene.md`](docs/scene.md) — the `src/scene/` WebGL scene, R3F usage, 3D gotchas.
+
 ## Golden rules
 
 - **Never push to `main`.** Branch, then open a PR. `main` auto-deploys to
@@ -100,7 +104,8 @@ Routes: `/`, `/writing`, `/writing/:slug`, `/about`, `/projects`,
 Cloudflare **Workers Builds** auto-deploys on merge to `main` (and builds PRs for
 preview). **Do not** instruct anyone to run a manual `wrangler deploy` — pushing
 is the deploy. A `522` means the host isn't attached in the dashboard, not a code
-bug.
+bug. Custom domains are dashboard-managed; never add them as `routes` in
+`wrangler.jsonc`. Full mechanics + triage: [`docs/deploy.md`](docs/deploy.md).
 
 ## Verifying before merge
 
