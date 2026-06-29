@@ -50,5 +50,4 @@ specific routes, kept rare on purpose.
   this reason; keep it for any new full-frame scene.
 - **Headless verification of 3D routes** needs SwiftShader/ANGLE flags, or the
   canvas renders blank. And framer-motion entrances with a `delay` can screenshot as
-  invisible under chrome-headless-shell — wait or capture a settled state. The
-  `ship-check` skill handles both.
+  invisible under chrome-headless-shell — wait or capture a settled state.
