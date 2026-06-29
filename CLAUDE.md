@@ -20,8 +20,8 @@ Deeper reference (read before touching that area):
   production on merge (see Deploy).
 - **All gates must pass before you call work done:** `npm run lint && npm test && npm run build`.
 - **Visual changes need eyes.** Strict TypeScript + tests catch logic, not looks.
-  Screenshot affected routes (the `ship-check` skill does this) or rely on the
-  Cloudflare PR preview deploy.
+  Screenshot the affected routes (headless, with SwiftShader/ANGLE flags for 3D
+  routes) or rely on the Cloudflare PR preview deploy.
 - **Match the surrounding code.** It's small and consistent — mirror its naming,
   comment density, and idioms.
 
@@ -109,6 +109,9 @@ bug. Custom domains are dashboard-managed; never add them as `routes` in
 
 ## Verifying before merge
 
-`ship-check` (project skill) is the heavy gate: deterministic checks (lint/test/
-build) + agentic code review + headless screenshots of affected routes. Use it
-before merging. CI / Cloudflare PR previews are the lightweight always-on signal.
+1. **Gates:** `npm run lint && npm test && npm run build`.
+2. **Review:** run `/code-review` on the diff for correctness and cleanup.
+3. **Visual:** headless-screenshot the affected routes (SwiftShader/ANGLE flags
+   for 3D routes), or check the Cloudflare PR preview deploy.
+
+CI / Cloudflare PR previews are the lightweight always-on signal.
