@@ -3,7 +3,7 @@ title: GPT From Scratch
 date: 2026-07-05
 slug: gpt-from-scratch
 hero: jellyfish
-excerpt: Friction is where the learning is — so I built a GPT by hand instead of watching the video.
+excerpt: Friction is where the learning is
 ---
 
 As I'm applying to AI Infrastructure roles, I realize I'm pretty far behind on GPT fundamentals. I've also spent most of my time avoiding PyTorch and data science because it wasn't the engineering I was interested in. On this job grind, I'm dedicating 3-4 hours a day to picking up new knowledge, closing my skill gaps, and writing about it so I can get in the habit of finishing.
