@@ -47,6 +47,12 @@ function Root() {
   );
 }
 
+// TODO(seo/scrapers): this is a client-rendered SPA — a plain fetch (recruiters'
+// LinkedIn/Slack unfurlers, WebFetch bots, search crawlers that don't run JS) sees
+// an empty #root shell, not the page content. Now that project + writing pages are
+// meant to be shared/linked externally, prerender these routes to static HTML at
+// build time (e.g. vite-plugin-ssg / a prerender pass over the route table below)
+// so /projects/* especially is readable on fetch, with real <title>/OG meta tags.
 const router = createBrowserRouter([
   {
     path: '/',
