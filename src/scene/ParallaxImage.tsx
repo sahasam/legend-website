@@ -1,6 +1,6 @@
 import { useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { useTexture } from '@react-three/drei';
+import { useSceneTexture } from './useSceneTexture';
 import {
   Mesh,
   ShaderMaterial,
@@ -81,7 +81,7 @@ export function ParallaxImage({
 }: Props) {
   const ref = useRef<Mesh>(null);
   const reducedMotion = useSceneStore((s) => s.reducedMotion);
-  const texture = useTexture(url);
+  const texture = useSceneTexture(url);
   const viewport = useThree((s) => s.viewport);
 
   const material = useMemo(() => {
